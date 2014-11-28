@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Indemnus Importer v1.0</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+
+</head>
+<body>
+
+<div class="container">
+    <div>
+            <div style="display: none" data-bind="visible: !fileSelected()" id="dvImportSegments" class="fileupload ">
+                <fieldset>
+                    <legend>Indemnus Importer</legend>
+                    <span class="btn btn-default btn-file">
+                        Browse for CSV to import:<input type="file" name="File Upload" id="FileUpload" accept=".csv" />
+                    </span>
+                </fieldset>
+            </div>
+            <div style="display: none" data-bind="visible: (fileSelected() && ((importedData().length == 0) && !matching()))">Loading file, matching will begin in a moment...</div>
+    </div>
+    <div style="display: none" data-bind="visible: ((importedData().length > 0) && !matching() && !importing())">
+        <button class="btn bg-info" data-bind="click: importSelected">Import Selected</button>
+    </div>
+    <div style="display: none" data-bind="visible: matching()">
+        <span>Matching records, please wait while we process the import.  This may take several minutes. Go get a cup of coffee while we do our magic.</span><br/>
+        <span data-bind="text:processingStatus"></span><br/>
+        <span style="color:red" data-bind="text:matchingError"></span>
+
+    </div>
+    <div style="display: none" data-bind="visible: importing()">
+        <span>Importing records, please wait while we process the import.  This may take several minutes. Go get a cup of coffee while we do our magic.</span><br/>
+        <span data-bind="text:processingStatus"></span><br/>
+        <span style="color:red" data-bind="text:matchingError"></span>
+
+    </div>
+
+    </div>
+    <div>
+        <table style="display: none" data-bind="visible: importedData().length > 0" class="table table-striped">
+                <thead>
+                    <th>All <input type="checkbox" data-bind="checked: importAll"/></th>
+                    <th>Matched Method</th>
+                    <th>Name</th>
+                    <th>State</th>
+                    <th>Birthday</th>
+                    <th>Carrier</th>
+                    <th>Policy#</th>
+                    <th>PlanType</th>
+                    <th>Plan</th>
+                    <th>Effective</th>
+                    <th>Mode Premuim</th>
+                    <th>Face Amount</th>
+                    <th>Status</th>
+
+                </thead>
+                <tbody data-bind="foreach: importedData()">
+                    <tr data-bind="css: importStatus">
+                        <td>
+                            <input type="checkbox" data-bind="visible: !importSuccess()&&!importError() , checked: importThis"/>
+                            <span style="color:green" data-bind="visible: importSuccess()" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            <span style="color:red" data-bind="visible: importError()" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </td>
+                        <td data-bind="text: matchedMethod"></td>
+                        <td data-bind="text: fullName"></td>
+                        <td data-bind="text: State"></td>
+                        <td data-bind="text: Birthday"></td>
+                        <td data-bind="text: _Carrier"></td>
+                        <td data-bind="text: _PolicyNumber0"></td>
+                        <td data-bind="text: _PlanType"></td>
+                        <td data-bind="text: _Plan"></td>
+                        <td data-bind="text: _PolicyEffectiveDate"></td>
+                        <td data-bind="text: _ModePremium"></td>
+                        <td data-bind="text: _FaceAmount0"></td>
+                        <td data-bind="text: _Status"></td>
+                    </tr>
+                    <tr data-bind="css: importStatus">
+                        <td colspan="11" data-bind="visible: importError(), text:errorMessage"></td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.parse.min.js"></script>
+<script src="js/knockoutjs-3.2.0.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+    // Activates knockout.js
+    ko.applyBindings(new AppViewModel());
+</script>
+</body>
+</html>

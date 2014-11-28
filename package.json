@@ -1,0 +1,18 @@
+{
+  "name": "IndemnusImport",
+  "version": "1.0.1",
+  "description": "Desktop Importer for Indemnus",
+  "main": "index.html",
+  "scripts": {
+    "start": "nodewebkit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RBM Global, LLC <devdept@richardbrashmarketing.com>",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^0.9.0",
+    "humanparser": "0.0.17",
+    "nodewebkit": "^0.11.0",
+    "xmlrpc": "~1.2.0"
+  }
+}
