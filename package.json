@@ -14,5 +14,13 @@
     "humanparser": "0.0.17",
     "nodewebkit": "^0.11.0",
     "xmlrpc": "~1.2.0"
+  },
+    "window": {
+    "title": "Indemnus Importer",
+    "icon": "RBM_Globe.png",
+    "toolbar": false,
+    "frame": true,
+    "width": 1200,
+    "height": 600
   }
 }
